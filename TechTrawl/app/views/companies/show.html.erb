@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <img src="<%= @company.logo %>" style="width: 200px">
+        </div>
+        <div class="col-6">
+            <div class="text-left">
+                <h2 style="display:inline"><%= @company.name %></h2>
+                <%= link_to "(visit website)", @company.website %>
+                <p><%= @company.overview %></p>
+                <ul style="list-style: none; padding: 0px;">
+                    <li><strong>Tags:</strong>
+                    <%= @company.tags.order(name: :asc).map{ |t| t.name}.join(', ') %>
+                    </li>
+                    <li><strong>Team Size:</strong> <%= @company.employees %> </li>
+                    <li><strong>Tech Team:</strong> <%= @company.tech_team %> </li>
+                    <li><strong>Manager:</strong> <%= @company.user.full_name %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <hr />
+        <div class="row" style="margin-top: 24px;">
+            <div class="col-5">
+                <a class="twitter-timeline" data-tweet-limit="2" href="<%= @company.twitter %>">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div class="col-4">
+            <h3 style="margin-top:12px;"> <%= @company.name %> News: </h3>
+            <% @company.articles.each do |article| %>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="<%= article.url_to_image %>">
+                    <div class="card-body">
+                        <p class="card-text"><%= link_to article.title, article.url %></p>
+                    </div>
+                </div>
+                <br>
+            <% end %>
+            </div>
+            <div class="col-3">
+                <h3 style="margin-top:12px;"> <%= @company.name %> Events: </h3>
+                <% @company.events.each do |event| %>
+                    <p style="border: 1px solid #e2e8eb; border-radius: 8px;" class="p-2 text-center">
+                    <%= link_to event.name, event.link %><br />
+                    <%= event.start_time.strftime("%B %d, %Y") %>
+                    </p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+

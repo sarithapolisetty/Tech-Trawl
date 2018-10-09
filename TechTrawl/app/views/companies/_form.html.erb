@@ -1,0 +1,80 @@
+<div style="margin-bottom:56px;">
+
+<%= form_for(@company) do |c|%>
+    
+    <% if @company.errors.present? %>
+        <p>
+        <%= @company.errors.full_messages.join(', ') %>
+        </p>
+    <% end %>
+
+    <div>
+        <%=c.label(:name, class:"mt-3")%>
+        <%=c.text_field :name, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:address, class:"mt-3")%>
+        <%=c.text_field :address, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:postal_code, class:"mt-3")%>
+        <%=c.text_field :postal_code, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:overview, class:"mt-3")%>
+        <%=c.text_area :overview, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:employees, class:"mt-3")%>
+        <%=c.number_field :employees, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:tech_team, class:"mt-3")%>
+        <%=c.number_field :tech_team, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label(:website, class:"mt-3")%>
+        <%=c.text_field :website, class:"form-control"%>
+    </div>
+
+    <div>
+        <%= c.label(:tags, class:"mt-3") %>
+        <%= c.collection_select(
+        :tag_ids,
+        Tag.order(name: :asc),
+        :id,
+        # :humanized_name,
+        :name,
+        {},
+        {multiple: :true, class: 'chosen-select'}
+        ) %>
+    </div>
+
+    <div>
+        <%=c.label :twitter, class:"mt-3"%>
+        <%=c.text_field :twitter, class:"form-control"%>
+    </div>
+
+    <div>
+        <%=c.label :logo, class:"mt-3"%>
+        <%=c.text_field :logo, class:"form-control"%>
+    </div>
+
+    <% if current_user&.admin?%>
+        <div>
+            <%=c.label(:published, class:"mt-3")%>
+            <%=c.check_box(:published, class:"mt-3")%>
+        </div>
+    <%end%>
+
+    <%= c.submit nil, class:"btn btn-outline-dark", style:"float:right;" %>
+
+<%end%>
+
+</div>
