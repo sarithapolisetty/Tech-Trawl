@@ -15,6 +15,7 @@ To view this Website prototype, run Rails Server and go to http://localhost:3000
 <li> News - API </li>
 <li> Meetup - API </li>
 <li> Simple Calendar API </li>
+</ul>
 
 ## Contributions
 
